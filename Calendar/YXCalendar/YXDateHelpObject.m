@@ -73,14 +73,14 @@ static YXDateHelpObject *yxDate = nil;
         
     } else {
         
-        NSString* ss = [NSString stringWithFormat:@"%ld-%d-3", (long)year, month+1];
+        NSString* ss = [NSString stringWithFormat:@"%ld-%ld-3", (long)year, month+1];
         [_formate setDateFormat:@"yyyy-MM-dd"];
         
         NSDate* the_month = [_formate dateFromString:ss];
         NSRange rng = [cal rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:the_month];
         NSInteger day_in_month = rng.length;
         
-        NSString* datestring = [NSString stringWithFormat:@"%ld-%d-%d", (long)year, month+1, MIN(day, day_in_month)];
+        NSString* datestring = [NSString stringWithFormat:@"%ld-%ld-%ld", (long)year, month+1, MIN(day, day_in_month)];
         rt = [_formate dateFromString:datestring];
         
         //NSLog(@" ss = %@  the_month = %@ day_in_month = %ld datestring = %@ rt = %@",ss,the_month,(long)day_in_month,datestring,rt);
@@ -126,13 +126,13 @@ static YXDateHelpObject *yxDate = nil;
         
     } else {
         
-        NSString* ss = [NSString stringWithFormat:@"%ld-%d-3", (long)year, month-1];
+        NSString* ss = [NSString stringWithFormat:@"%ld-%ld-3", (long)year, month-1];
         [_formate setDateFormat:@"yyyy-MM-dd"];
         NSDate* the_month = [_formate dateFromString:ss];
         NSRange rng = [cal rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:the_month];
         NSInteger day_in_month = rng.length;
         
-        NSString* datestring = [NSString stringWithFormat:@"%ld-%d-%d", (long)year, month-1, MIN(day, day_in_month)];
+        NSString* datestring = [NSString stringWithFormat:@"%ld-%ld-%ld", (long)year, month-1, MIN(day, day_in_month)];
         rt = [_formate dateFromString:datestring];
         
         //NSLog(@" ss = %@  the_month = %@ day_in_month = %ld datestring = %@ rt = %@",ss,the_month,(long)day_in_month,datestring,rt);

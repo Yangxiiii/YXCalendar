@@ -27,14 +27,6 @@
 
 //MARK: - setmethod
 
-- (void)setSelectDate:(NSDate *)selectDate {
-    _selectDate = selectDate;
-}
-
-- (void)setCurrentDate:(NSDate *)currentDate {
-    _currentDate = currentDate;
-}
-
 - (void)setCellDate:(NSDate *)cellDate {
     _cellDate = cellDate;
     if (_type == CalendarType_Week) {
@@ -77,12 +69,24 @@
         if ([[YXDateHelpObject manager] isSameDate:_cellDate AnotherDate:_selectDate]) {
             _dayL.backgroundColor = [UIColor blueColor];
             _dayL.textColor = [UIColor whiteColor];
+            _pointV.backgroundColor = [UIColor whiteColor];
         } else {
             _dayL.backgroundColor = [UIColor clearColor];
             _dayL.textColor = [UIColor blackColor];
+            _pointV.backgroundColor = [UIColor orangeColor];
         }
         
     }
+    NSString *currentDate = [[YXDateHelpObject manager] getStrFromDateFormat:@"MM-dd" Date:_cellDate];
+    _pointV.hidden = YES;
+    if (_eventArray.count) {
+        for (NSString *strDate in _eventArray) {
+            if ([strDate isEqualToString:currentDate]) {
+                _pointV.hidden = NO;
+            }
+        }
+    }
+    
 }
 
 @end

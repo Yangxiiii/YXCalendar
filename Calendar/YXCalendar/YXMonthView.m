@@ -48,6 +48,11 @@
 
 //MARK: - setMethod
 
+- (void)setEventArray:(NSArray *)eventArray {
+    _eventArray = eventArray;
+    [_collectionV reloadData];
+}
+
 - (void)setType:(CalendarType)type {
     _type = type;
     [_collectionV reloadData];
@@ -85,6 +90,7 @@
     YXDayCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"YXDayCell" forIndexPath:indexPath];
     NSDate *cellDate = [self dateForCellAtIndexPath:indexPath];
     cell.type = _type;
+    cell.eventArray = _eventArray;
     cell.selectDate = _selectDate;
     cell.currentDate = _currentDate;
     cell.cellDate = cellDate;

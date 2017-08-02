@@ -193,6 +193,9 @@ static CGFloat const weeksH = 30;       //周高度
     _middleView.selectDate = _selectDate;
     _middleView.sendSelectDate = ^(NSDate *selDate) {
         weakSelf.selectDate = selDate;
+        if (weakSelf.sendSelectDate) {
+            weakSelf.sendSelectDate(selDate);
+        }
         [weakSelf setData];
     };
     _rightView = [[YXMonthView alloc] initWithFrame:CGRectMake(ViewW * 2, 0, ViewW, height) Date:[[YXDateHelpObject manager] getNextMonth:_currentDate]];
@@ -312,6 +315,14 @@ static CGFloat const weeksH = 30;       //周高度
 //MARK: - scrollViewMethod
 - (void)scrollToCenter {
     _scrollV.contentOffset = CGPointMake(ViewW, 0);
+    
+    NSMutableArray *array = [NSMutableArray array];
+    for (int i = 0; i < 10; i++) {
+        NSString *dateStr = [NSString stringWithFormat:@"%@-%d",[[YXDateHelpObject manager] getStrFromDateFormat:@"MM" Date:_currentDate],1 + arc4random()%28];
+        [array addObject:dateStr];
+    }
+    
+    _middleView.eventArray = array;
 }
 
 @end

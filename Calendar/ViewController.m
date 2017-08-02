@@ -28,6 +28,9 @@
         }];
         
     };
+    _calendar.sendSelectDate = ^(NSDate *selDate) {
+        NSLog(@"%@",[[YXDateHelpObject manager] getStrFromDateFormat:@"yyyy-MM-dd" Date:selDate]);
+    };
     [self.view addSubview:_calendar];
     
 }

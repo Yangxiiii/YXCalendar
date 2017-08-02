@@ -22,5 +22,6 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) NSDate *selectDate;   //选择日期
 @property (nonatomic, strong) NSDate *cellDate;     //cell显示日期
 @property (nonatomic, assign) CalendarType type;    //选择类型
+@property (nonatomic, strong) NSArray *eventArray;  //事件数组
 
 @end

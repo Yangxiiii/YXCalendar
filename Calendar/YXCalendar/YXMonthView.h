@@ -17,6 +17,7 @@ typedef void(^SendSelectDate)(NSDate *selDate);
 @property (nonatomic, strong) NSDate *selectDate;           //选中日期
 @property (nonatomic, copy) SendSelectDate sendSelectDate;  //回传选中日期
 @property (nonatomic, assign) CalendarType type;            //日历模式
+@property (nonatomic, strong) NSArray *eventArray;          //事件数组
 
 - (instancetype)initWithFrame:(CGRect)frame Date:(NSDate *)date;
 

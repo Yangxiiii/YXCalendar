@@ -13,7 +13,8 @@ typedef void(^RefreshH)(CGFloat viewH);
 
 @interface YXCalendarView : UIView
 
-@property (nonatomic, assign) CalendarType type;    //选择类型
+@property (nonatomic, assign) CalendarType type;            //选择类型
+@property (nonatomic, copy) SendSelectDate sendSelectDate;  //回传选择日期
 
 /**
  实现该block滑动时更新控件高度
