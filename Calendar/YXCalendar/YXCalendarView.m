@@ -180,7 +180,7 @@ static CGFloat const weeksH = 30;       //周高度
     [self addSubview:_scrollV];
     
     __weak typeof(self) weakSelf = self;
-    CGFloat height = ViewH - yearMonthH - weeksH;
+    CGFloat height = 6 * dayCellH;
     _leftView = [[YXMonthView alloc] initWithFrame:CGRectMake(0, 0, ViewW, height) Date:[[YXDateHelpObject manager] getPreviousMonth:_currentDate]];
     _leftView.type = _type;
     _leftView.selectDate = _selectDate;
