@@ -13,7 +13,6 @@ typedef void(^RefreshH)(CGFloat viewH);
 
 @interface YXCalendarView : UIView
 
-@property (nonatomic, assign) CalendarType type;            //选择类型
 @property (nonatomic, copy) SendSelectDate sendSelectDate;  //回传选择日期
 
 /**
@@ -25,17 +24,19 @@ typedef void(^RefreshH)(CGFloat viewH);
  根据日期获取控件总高度
  
  @param date 日期
+ @param type 类型
  @return return value description
  */
-+ (CGFloat)getMonthTotalHeight:(NSDate *)date;
++ (CGFloat)getMonthTotalHeight:(NSDate *)date type:(CalendarType)type;
 
 /**
  初始化方法
  
  @param frame 控件尺寸,高度可以调用该类计算方法计算
  @param date 日期
+ @param type 类型
  @return return value description
  */
-- (instancetype)initWithFrame:(CGRect)frame Date:(NSDate *)date;
+- (instancetype)initWithFrame:(CGRect)frame Date:(NSDate *)date Type:(CalendarType)type;
 
 @end

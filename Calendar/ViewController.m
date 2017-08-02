@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _calendar = [[YXCalendarView alloc] initWithFrame:CGRectMake(0, 100, [UIScreen mainScreen].bounds.size.width, [YXCalendarView getMonthTotalHeight:[NSDate date]]) Date:[NSDate date]];
+    _calendar = [[YXCalendarView alloc] initWithFrame:CGRectMake(0, 100, [UIScreen mainScreen].bounds.size.width, [YXCalendarView getMonthTotalHeight:[NSDate date] type:CalendarType_Month]) Date:[NSDate date] Type:CalendarType_Month];
     __weak typeof(_calendar) weakCalendar = _calendar;
     _calendar.refreshH = ^(CGFloat viewH) {
         [UIView animateWithDuration:0.3 animations:^{
