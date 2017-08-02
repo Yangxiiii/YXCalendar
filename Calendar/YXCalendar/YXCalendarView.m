@@ -135,7 +135,6 @@ static CGFloat const weeksH = 30;       //周高度
         _type = CalendarType_Month;
         [self setData];
         [self scrollToCenter];
-//        self.type = CalendarType_Month;
     }
     
 }
@@ -276,7 +275,6 @@ static CGFloat const weeksH = 30;       //周高度
             _yearMonthL.text = [[YXDateHelpObject manager] getStrFromDateFormat:@"yyyy年MM月" Date:_currentDate];
         } else {
             //下周
-//            NSDate *tmpDate = _currentDate.mutableCopy;
             _middleView.currentDate = [[YXDateHelpObject manager] getEarlyOrLaterDate:_currentDate LeadTime:7 Type:2];
             _middleView.selectDate = _selectDate;
             _leftView.currentDate = _currentDate;
@@ -285,9 +283,6 @@ static CGFloat const weeksH = 30;       //周高度
             _tmpCurrentDate = _currentDate.copy;
             _rightView.currentDate = [[YXDateHelpObject manager] getEarlyOrLaterDate:_currentDate LeadTime:7 Type:2];
             _rightView.selectDate = _selectDate;
-//            if ([[YXDateHelpObject manager] checkSameMonth:tmpDate AnotherMonth:_currentDate]) {
-                //如果加个判断就不用每次都设值了,不改了
-//            }
             _yearMonthL.text = [[YXDateHelpObject manager] getStrFromDateFormat:@"yyyy年MM月" Date:_currentDate];
         }
         
@@ -330,6 +325,7 @@ static CGFloat const weeksH = 30;       //周高度
 - (void)scrollToCenter {
     _scrollV.contentOffset = CGPointMake(ViewW, 0);
     
+    //可以在这边进行网络请求获取事件日期数组等,记得取消上个未完成的网络请求
     NSMutableArray *array = [NSMutableArray array];
     for (int i = 0; i < 10; i++) {
         NSString *dateStr = [NSString stringWithFormat:@"%@-%d",[[YXDateHelpObject manager] getStrFromDateFormat:@"MM" Date:_currentDate],1 + arc4random()%28];
