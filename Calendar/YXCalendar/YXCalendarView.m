@@ -19,6 +19,7 @@ static CGFloat const weeksH = 30;       //周高度
 @property (nonatomic, strong) UIScrollView *scrollV;    //scrollview
 @property (nonatomic, strong) NSDate *currentDate;      //当前月份
 @property (nonatomic, strong) NSDate *selectDate;       //选中日期
+@property (nonatomic, strong) NSDate *tmpCurrentDate;   //记录上下滑动日期
 
 @property (nonatomic, strong) YXMonthView *leftView;    //左侧日历
 @property (nonatomic, strong) YXMonthView *middleView;  //中间日历
@@ -95,6 +96,7 @@ static CGFloat const weeksH = 30;       //周高度
 - (void)slideView:(UISwipeGestureRecognizer *)sender {
     
     if (sender.direction == UISwipeGestureRecognizerDirectionUp) {
+        _tmpCurrentDate = _currentDate.copy;
         //上滑
         if (_type == CalendarType_Week) {
             return;
@@ -117,6 +119,9 @@ static CGFloat const weeksH = 30;       //周高度
         //下滑
         if (_type == CalendarType_Month) {
             return;
+        }
+        if (![[YXDateHelpObject manager] checkSameMonth:_tmpCurrentDate AnotherMonth:_currentDate]) {
+            _currentDate = _tmpCurrentDate.copy;
         }
         _type = CalendarType_Month;
         [self setData];
@@ -184,10 +189,10 @@ static CGFloat const weeksH = 30;       //周高度
     _leftView = [[YXMonthView alloc] initWithFrame:CGRectMake(0, 0, ViewW, height) Date:[[YXDateHelpObject manager] getPreviousMonth:_currentDate]];
     _leftView.type = _type;
     _leftView.selectDate = _selectDate;
-    _leftView.sendSelectDate = ^(NSDate *selDate) {
-        weakSelf.selectDate = selDate;
-        [weakSelf setData];
-    };
+//    _leftView.sendSelectDate = ^(NSDate *selDate) {
+//        weakSelf.selectDate = selDate;
+//        [weakSelf setData];
+//    };
     _middleView = [[YXMonthView alloc] initWithFrame:CGRectMake(ViewW, 0, ViewW, height) Date:_currentDate];
     _middleView.type = _type;
     _middleView.selectDate = _selectDate;
@@ -201,10 +206,10 @@ static CGFloat const weeksH = 30;       //周高度
     _rightView = [[YXMonthView alloc] initWithFrame:CGRectMake(ViewW * 2, 0, ViewW, height) Date:[[YXDateHelpObject manager] getNextMonth:_currentDate]];
     _rightView.type = _type;
     _rightView.selectDate = _selectDate;
-    _rightView.sendSelectDate = ^(NSDate *selDate) {
-        weakSelf.selectDate = selDate;
-        [weakSelf setData];
-    };
+//    _rightView.sendSelectDate = ^(NSDate *selDate) {
+//        weakSelf.selectDate = selDate;
+//        [weakSelf setData];
+//    };
     [_scrollV addSubview:_leftView];
     [_scrollV addSubview:_middleView];
     [_scrollV addSubview:_rightView];
