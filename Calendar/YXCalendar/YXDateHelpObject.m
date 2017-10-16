@@ -278,4 +278,34 @@ static YXDateHelpObject *yxDate = nil;
     
 }
 
+/**
+ 时间戳返回时间
+
+ @param format 时间格式
+ @param stampStr 时间戳
+ @param msec 是否精确到毫秒
+ @return 时间
+ */
+- (NSString *)getTimeStrFromStampWithFormat:(NSString *)format stampStr:(NSString *)stampStr msec:(BOOL)msec {
+    
+    [_formate setDateFormat:format];
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:msec ? stampStr.floatValue/1000.0 : stampStr.floatValue];
+    return [_formate stringFromDate:date];
+}
+
+/**
+ 时间字符串返回时间戳
+
+ @param format 时间格式
+ @param timeStr 时间字符串
+ @param msec 是否精确到毫秒
+ @return 时间戳
+ */
+- (NSString *)getStampStrFromTimeStrWithFormat:(NSString *)format timeStr:(NSString *)timeStr msec:(BOOL)msec {
+    [_formate setDateFormat:format];
+    NSDate *date = [_formate dateFromString:timeStr];
+    NSTimeInterval timeLength = [date timeIntervalSince1970];
+    return [NSString stringWithFormat:@"%.f",msec ? timeLength*1000.0 : timeLength];
+}
+
 @end

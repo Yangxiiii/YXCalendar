@@ -112,6 +112,24 @@
  */
 - (NSDate *)getEarlyOrLaterDate:(NSDate *)currentDate LeadTime:(NSInteger)lead Type:(NSInteger)timeType;
 
+/**
+ 时间戳返回时间
+ 
+ @param format 时间格式
+ @param stampStr 时间戳
+ @param msec 是否精确到毫秒
+ @return 时间
+ */
+- (NSString *)getTimeStrFromStampWithFormat:(NSString *)format stampStr:(NSString *)stampStr msec:(BOOL)msec;
 
+/**
+ 时间字符串返回时间戳
+ 
+ @param format 时间格式
+ @param timeStr 时间字符串
+ @param msec 是否精确到毫秒
+ @return 时间戳
+ */
+- (NSString *)getStampStrFromTimeStrWithFormat:(NSString *)format timeStr:(NSString *)timeStr msec:(BOOL)msec;
 
 @end
