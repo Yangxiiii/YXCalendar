@@ -225,21 +225,17 @@ static CGFloat const weeksH = 30;       //周高度
 
 - (void)setData {
     
+    _middleView.currentDate = _currentDate;
     if (_type == CalendarType_Month) {
-        _middleView.currentDate = _currentDate;
-        _middleView.selectDate = _selectDate;
         _leftView.currentDate = [[YXDateHelpObject manager] getPreviousMonth:_currentDate];
-        _leftView.selectDate = _selectDate;
         _rightView.currentDate = [[YXDateHelpObject manager] getNextMonth:_currentDate];
-        _rightView.selectDate = _selectDate;
     } else {
-        _middleView.currentDate = _currentDate;
-        _middleView.selectDate = _selectDate;
         _leftView.currentDate = [[YXDateHelpObject manager] getEarlyOrLaterDate:_currentDate LeadTime:-7 Type:2];
-        _leftView.selectDate = _selectDate;
         _rightView.currentDate = [[YXDateHelpObject manager] getEarlyOrLaterDate:_currentDate LeadTime:7 Type:2];
-        _rightView.selectDate = _selectDate;
     }
+    _middleView.selectDate = _selectDate;
+    _leftView.selectDate = _selectDate;
+    _rightView.selectDate = _selectDate;
     
     
     self.type = _type;
@@ -263,56 +259,48 @@ static CGFloat const weeksH = 30;       //周高度
     
     if (_scrollV.contentOffset.x > 2*ViewW -1) {
         
+        _leftView.currentDate = _currentDate;
         if (_type == CalendarType_Month) {
             //左滑,下个月
             _middleView.currentDate = [[YXDateHelpObject manager] getNextMonth:_currentDate];
-            _middleView.selectDate = _selectDate;
-            _leftView.currentDate = _currentDate;
-            _leftView.selectDate = _selectDate;
             _currentDate = [[YXDateHelpObject manager] getNextMonth:_currentDate];
             _rightView.currentDate = [[YXDateHelpObject manager] getNextMonth:_currentDate];
-            _rightView.selectDate = _selectDate;
             _yearMonthL.text = [[YXDateHelpObject manager] getStrFromDateFormat:@"yyyy年MM月" Date:_currentDate];
         } else {
             //下周
             _middleView.currentDate = [[YXDateHelpObject manager] getEarlyOrLaterDate:_currentDate LeadTime:7 Type:2];
-            _middleView.selectDate = _selectDate;
-            _leftView.currentDate = _currentDate;
-            _leftView.selectDate = _selectDate;
             _currentDate = [[YXDateHelpObject manager] getEarlyOrLaterDate:_currentDate LeadTime:7 Type:2];
             _tmpCurrentDate = _currentDate.copy;
             _rightView.currentDate = [[YXDateHelpObject manager] getEarlyOrLaterDate:_currentDate LeadTime:7 Type:2];
-            _rightView.selectDate = _selectDate;
             _yearMonthL.text = [[YXDateHelpObject manager] getStrFromDateFormat:@"yyyy年MM月" Date:_currentDate];
         }
+        _rightView.selectDate = _selectDate;
+        _leftView.selectDate = _selectDate;
+        _middleView.selectDate = _selectDate;
         
         [self scrollToCenter];
         self.type = _type;
         
     } else if (_scrollV.contentOffset.x < 1) {
         
+        _rightView.currentDate = _currentDate;
         if (_type == CalendarType_Month) {
             //右滑,上个月
             _middleView.currentDate = [[YXDateHelpObject manager] getPreviousMonth:_currentDate];
-            _middleView.selectDate = _selectDate;
-            _rightView.currentDate = _currentDate;
-            _rightView.selectDate = _selectDate;
             _currentDate = [[YXDateHelpObject manager] getPreviousMonth:_currentDate];
             _leftView.currentDate = [[YXDateHelpObject manager] getPreviousMonth:_currentDate];
-            _leftView.selectDate = _selectDate;
             _yearMonthL.text = [[YXDateHelpObject manager] getStrFromDateFormat:@"yyyy年MM月" Date:_currentDate];
         } else {
             //上周
             _middleView.currentDate = [[YXDateHelpObject manager] getEarlyOrLaterDate:_currentDate LeadTime:-7 Type:2];
-            _middleView.selectDate = _selectDate;
-            _rightView.currentDate = _currentDate;
-            _rightView.selectDate = _selectDate;
             _currentDate = [[YXDateHelpObject manager] getEarlyOrLaterDate:_currentDate LeadTime:-7 Type:2];
             _tmpCurrentDate = _currentDate.copy;
             _leftView.currentDate = [[YXDateHelpObject manager] getEarlyOrLaterDate:_currentDate LeadTime:-7 Type:2];
-            _leftView.selectDate = _selectDate;
             _yearMonthL.text = [[YXDateHelpObject manager] getStrFromDateFormat:@"yyyy年MM月" Date:_currentDate];
         }
+        _rightView.selectDate = _selectDate;
+        _leftView.selectDate = _selectDate;
+        _middleView.selectDate = _selectDate;
         
         [self scrollToCenter];
         self.type = _type;
